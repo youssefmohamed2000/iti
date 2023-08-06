@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $user): UserResource
     {
-        $validated = $request->safe();
+        $validated = $request->validated();
 
         $validated['password'] = Hash::make($validated['password']);
 

@@ -8,18 +8,12 @@ use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
-        $request->validate([
-            'email' => 'required|string|email|max:255|exists:users,email',
-            'password' => 'required|string|max:255',
-        ]);
-
         $validated = $request->validated();
         if (auth()->attempt([
             'email' => $validated['email'],
